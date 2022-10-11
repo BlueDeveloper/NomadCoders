@@ -1,0 +1,324 @@
+<!DOCTYPE html>!
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/common.js"></script>
+    <title>Momentum</title>
+    <style>
+        * {
+            margin: 0;
+            overflow-wrap: break-word;
+        }
+
+        *, :after, :before {
+            box-sizing: border-box;
+        }
+
+        .background[data-v-684a4388] {
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+            transition: transform 0.3s ease-out;
+        }
+
+        .background, .background-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: transparent;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .background-item {
+            opacity: 1;
+            transition: transform var(--a-show-full-duration) var(--a-show-full-curve);
+        }
+
+        #section-form {
+            transition: 5s;
+        }
+
+        .apps {
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            transition: opacity .3s var(--a-curve);
+        }
+
+        .apps, .full {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .full {
+            height: 100%;
+        }
+
+        .intro {
+            --margin: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            line-height: normal;
+            font-size: 3.375rem;
+        }
+
+        .intro-top {
+            padding: var(--margin) 0;
+            flex: 0 0 120px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            --size: 170px;
+            width: var(--size);
+            border-radius: 100%;
+            box-shadow: 0 0 50px rgb(0 0 0 / 10%);
+        }
+
+        .intro-middle {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .intro-middle-wrapper-greeting {
+            max-width: 100%;
+            padding: 0 40px;
+            position: relative;
+            top: -8px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro-middle-wrapper-todo {
+            max-width: 100%;
+            padding: 50px;
+            position: relative;
+            top: -8px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .greeting {
+            line-height: 1.2;
+            white-space: normal;
+            font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            color: #ffffff;
+        }
+
+        .todo {
+            padding-bottom: 15px;
+            line-height: 1.2;
+            white-space: normal;
+            font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            color: #ffffff;
+            font-size: 2rem;
+        }
+
+        .input-wrapper.has-text-input {
+            padding: 0;
+        }
+
+        .input-wrapper-greeting {
+            --pass-vis-icon-width: 21px;
+            --pass-vis-icon-side-padding: 8px;
+            --pass-vis-width: calc(var(--pass-vis-icon-width) + var(--pass-vis-icon-side-padding));
+            max-width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-self: stretch;
+            font-weight: 500;
+            border-bottom: 3px solid #fff;
+            padding-top: 10px;
+        }
+
+        .input-wrapper-todo {
+            --pass-vis-icon-width: 21px;
+            --pass-vis-icon-side-padding: 8px;
+            --pass-vis-width: calc(var(--pass-vis-icon-width) + var(--pass-vis-icon-side-padding));
+            width: 25%;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-self: stretch;
+            font-weight: 500;
+            border-bottom: 3px solid #fff;
+            height: 30%;
+        }
+
+        .input-greeting {
+            width: 100%;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border: none;
+            caret-color: white;
+            font-weight: 500;
+            line-height: normal;
+            outline: none;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            background: 0 0;
+            color: #fff;
+            font-size: 70%;
+            cursor: default;
+        }
+
+        .input-todo {
+            width: 100%;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border: none;
+            caret-color: white;
+            font-weight: 500;
+            line-height: normal;
+            outline: none;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            background: 0 0;
+            color: #fff;
+            font-size: 50%;
+        }
+
+        .intro-bottom {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: var(--margin) 0;
+            flex: 0.3;
+            border: 3px solid #ffffff;
+
+        }
+
+        .intro-bottom-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 1.5rem;
+            color: #fff;
+            padding: 0px;
+        }
+
+        li {
+            float: left;
+            margin-left: 4%;
+            cursor: pointer;
+            transition:1s;
+            box-shadow: 2px 2px 0 rgb(255 255 255 / 50%);
+        }
+
+        li:hover {
+            background: gray;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="main-view" style="visibility: visible;">
+    <div class="backgrounds">
+        <div class="background">
+            <div class="background-item"></div>
+        </div>
+    </div>
+    <form id="section-form">
+        <div class="apps hide-apps">
+            <div class="region full">
+                <div class="intro">
+                    <div class="intro-top">
+                        <img src="img/logo2.png" class="logo">
+                    </div>
+                    <div class="intro-middle u--scrim">
+                        <div class="intro-middle-wrapper-greeting">
+                            <span class="greeting">Hello, what's your name?</span>
+                            <div class="input-wrapper-greeting has-text-input">
+                                <span class="input-center-column">
+                                    <input data-keyInfo="username" name="userInfo" spellcheck="false" autocomplete="off" type="text" class="input-greeting" required>
+                                    <br>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="intro-middle-wrapper-todo">
+                            <span class="todo">ToDo-List</span>
+                            <div class="input-wrapper-todo has-text-input">
+                                <span class="input-center-column">
+                                    <input spellcheck="false" name="todoInfo" autocomplete="off" type="text" class="input-todo" >
+                                    <input type="submit" hidden>
+                                    <br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-bottom">
+                        <div class="intro-bottom-wrapper">
+                            <ul>
+                                <li>가계부 작성</li>
+                                <li>장보기</li>
+                                <li>스프링공부</li>
+                                <li>율무밥주기</li>
+                                <li>빨래하기</li>
+                                <li>설거지하기</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                                <li>할일</li>
+                            </ul>
+                        </div>
+                        <div class="scrim"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="js/background.js"></script>
+<script src="js/greetings.js"></script>
+<script src="js/todo.js"></script>
+<!--<script src="js/quotes.js"></script>-->
+<!--<script src="js/weather.js"></script>-->
+</body>
+</html>
